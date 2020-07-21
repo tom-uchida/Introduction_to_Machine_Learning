@@ -40,14 +40,22 @@ idx_label0, idx_label1, idx_label2 = np.where(gmm_y_pred==0), np.where(gmm_y_pre
 gmm_y_pred[idx_label0], gmm_y_pred[idx_label1], gmm_y_pred[idx_label2] = 1, 2, 0
 
 # Visualize the result of the clustering
-plt.figure(figsize=(15, 5))
-plt.subplot(131)
-plt.title("(a) true cluster")
-plt.scatter(X_norm[:, 0], X_norm[:, 1], c=y, cmap='brg')
-plt.subplot(132)
-plt.title("(b) k-means cluster")
-plt.scatter(X_norm[:, 0], X_norm[:, 1], c=~kmean_y_pred, cmap='brg')
-plt.subplot(133)
-plt.title("(c) GMM cluster")
-plt.scatter(X_norm[:, 0], X_norm[:, 1], c=gmm_y_pred, cmap='brg')
-plt.show()
+# plt.figure(figsize=(15, 5))
+# plt.subplot(131)
+# plt.title("(a) true cluster")
+# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=y, cmap='brg')
+# plt.subplot(132)
+# plt.title("(b) k-means cluster")
+# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=~kmean_y_pred, cmap='brg')
+# plt.subplot(133)
+# plt.title("(c) GMM cluster")
+# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=gmm_y_pred, cmap='brg')
+# plt.show()
+
+# Calculate cluster belonging probability about new input data
+new_data = [[-0.5, 0.3]]
+probs = gmm.predict_proba(new_data)[0]
+
+# Print the result
+for idx, prob in enumerate(probs):
+    print(f'cluster{idx} probability:{prob:.3f}')
