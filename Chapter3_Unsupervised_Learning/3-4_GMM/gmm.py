@@ -36,21 +36,21 @@ kmean_y_pred = kmeans.predict(X_norm)
 gmm = GaussianMixture(n_components=3, random_state=5)
 gmm.fit(X_norm)
 gmm_y_pred = gmm.predict(X_norm)
-idx_label0, idx_label1, idx_label2 = np.where(gmm_y_pred==0), np.where(gmm_y_pred==1), np.where(gmm_y_pred==2)
-gmm_y_pred[idx_label0], gmm_y_pred[idx_label1], gmm_y_pred[idx_label2] = 1, 2, 0
+# idx_label0, idx_label1, idx_label2 = np.where(gmm_y_pred==0), np.where(gmm_y_pred==1), np.where(gmm_y_pred==2)
+# gmm_y_pred[idx_label0], gmm_y_pred[idx_label1], gmm_y_pred[idx_label2] = 1, 2, 0
 
 # Visualize the result of the clustering
-# plt.figure(figsize=(15, 5))
-# plt.subplot(131)
-# plt.title("(a) true cluster")
-# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=y, cmap='brg')
-# plt.subplot(132)
-# plt.title("(b) k-means cluster")
-# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=~kmean_y_pred, cmap='brg')
-# plt.subplot(133)
-# plt.title("(c) GMM cluster")
-# plt.scatter(X_norm[:, 0], X_norm[:, 1], c=gmm_y_pred, cmap='brg')
-# plt.show()
+plt.figure(figsize=(15, 5))
+plt.subplot(131)
+plt.title("(a) true cluster")
+plt.scatter(X_norm[:, 0], X_norm[:, 1], c=y, cmap='brg')
+plt.subplot(132)
+plt.title("(b) k-means cluster")
+plt.scatter(X_norm[:, 0], X_norm[:, 1], c=2-kmeans_y_pred, cmap='brg')
+plt.subplot(133)
+plt.title("(c) GMM cluster")
+plt.scatter(X_norm[:, 0], X_norm[:, 1], c=(gmm_y_pred+1) % 3, cmap='brg')
+plt.show()
 
 # Calculate cluster belonging probability about new input data
 new_data = [[-0.5, 0.3]]
